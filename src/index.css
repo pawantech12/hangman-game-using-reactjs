@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hangman {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  border-left: 10px solid black;
+  border-top: 10px solid black;
+  margin-bottom: 20px;
+}
+
+.stand {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 20px;
+  width: 10px;
+  background: black;
+}
+
+.hangman-part {
+  position: absolute;
+  background: black;
+}
+
+.head {
+  top: 20px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: -20px;
+}
+
+.body {
+  top: 60px;
+  left: 50%;
+  width: 10px;
+  height: 60px;
+  margin-left: -5px;
+}
+
+.left-arm {
+  top: 60px;
+  left: 50%;
+  width: 10px;
+  height: 40px;
+  margin-left: -5px;
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+.right-arm {
+  top: 60px;
+  left: 50%;
+  width: 10px;
+  height: 40px;
+  margin-left: -5px;
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
+.left-leg {
+  top: 120px;
+  left: 50%;
+  width: 10px;
+  height: 40px;
+  margin-left: -5px;
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+.right-leg {
+  top: 120px;
+  left: 50%;
+  width: 10px;
+  height: 40px;
+  margin-left: -5px;
+  transform: rotate(45deg);
+  transform-origin: top left;
+}

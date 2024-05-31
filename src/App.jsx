@@ -1,57 +1,86 @@
-import React, { useState, useEffect } from "react";
-import HangmanDrawing from "./components/HangmanDrawing";
-import Word from "./components/Word";
-import Keyboard from "./components/Keyboard";
-import Modal from "./components/Modal";
+import React, { useState } from "react";
+import Menu from "./components/Menu";
+import Game from "./components/Game";
+import Options from "./components/Options";
+import Info from "./components/Info";
 
-const words = ["react", "javascript", "tailwind", "vite", "hangman"];
-
-const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
+const words = ["MUG", "TELEPHONE", "CAR", "HORSE", "MOUSE"]; // Sample words, extend as needed
 
 function App() {
-  const [word, setWord] = useState(getRandomWord());
-  const [guessedLetters, setGuessedLetters] = useState([]);
-  const [wrongGuesses, setWrongGuesses] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+  const [currentView, setCurrentView] = useState("menu");
+  const [word, setWord] = useState("");
+  const [hiddenWord, setHiddenWord] = useState("");
+  const [errors, setErrors] = useState(0);
+  const [difficulty, setDifficulty] = useState(2); // 1: Easy, 2: Medium, 3: Hard
 
-  const handleGuess = (letter) => {
-    if (guessedLetters.includes(letter)) return;
-    if (!word.includes(letter)) setWrongGuesses(wrongGuesses + 1);
-    setGuessedLetters([...guessedLetters, letter]);
+  const startGame = () => {
+    setErrors(0);
+    const newWord = words[Math.floor(Math.random() * words.length)];
+    setWord(newWord);
+    setHiddenWord(newWord.replace(/./g, "*"));
+    setCurrentView("game");
   };
 
-  useEffect(() => {
-    if (wrongGuesses >= 6) {
-      setModalContent(`Game Over! The word was "${word}".`);
-      setShowModal(true);
+  const checkLetter = (letter) => {
+    if (word.includes(letter)) {
+      const newHiddenWord = hiddenWord
+        .split("")
+        .map((char, index) => (word[index] === letter ? letter : char))
+        .join("");
+      setHiddenWord(newHiddenWord);
+      if (newHiddenWord === word) {
+        alert("Congratulations! You guessed the word!");
+        setCurrentView("menu");
+      }
+    } else {
+      setErrors(errors + 1);
+      if (errors + 1 >= 11) {
+        alert(`Game over! The word was: ${word}`);
+        setCurrentView("menu");
+      }
     }
-    if (word.split("").every((letter) => guessedLetters.includes(letter))) {
-      setModalContent("Congratulations! You won!");
-      setShowModal(true);
-    }
-  }, [wrongGuesses, guessedLetters, word]);
+  };
 
-  const resetGame = () => {
-    setWord(getRandomWord());
-    setGuessedLetters([]);
-    setWrongGuesses(0);
-    setShowModal(false);
+  const showOptions = () => setCurrentView("options");
+  const showInfo = () => setCurrentView("info");
+  const showMenu = () => setCurrentView("menu");
+
+  const changeDifficulty = () => {
+    setDifficulty(difficulty === 3 ? 1 : difficulty + 1);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <HangmanDrawing wrongGuesses={wrongGuesses} />
-      <Word word={word} guessedLetters={guessedLetters} />
-      <Keyboard handleGuess={handleGuess} guessedLetters={guessedLetters} />
-      <button
-        onClick={resetGame}
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Reset Game
-      </button>
-      {showModal && (
-        <Modal content={modalContent} onClose={() => setShowModal(false)} />
+    <div
+      id="container"
+      className="flex flex-col items-center justify-center text-center w-full h-full p-5 bg-custom-gold relative"
+    >
+      <div className="title text-custom-cream text-4xl mb-5">HANGMAN</div>
+      {currentView === "menu" && (
+        <Menu
+          startGame={startGame}
+          showOptions={showOptions}
+          showInfo={showInfo}
+        />
+      )}
+      {currentView === "game" && (
+        <Game
+          hiddenWord={hiddenWord}
+          errors={errors}
+          checkLetter={checkLetter}
+        />
+      )}
+      {currentView === "options" && (
+        <Options difficulty={difficulty} changeDifficulty={changeDifficulty} />
+      )}
+      {currentView === "info" && <Info />}
+      {currentView !== "menu" && (
+        <div
+          onClick={showMenu}
+          id="back"
+          className="text-center w-1/2 mx-auto bg-custom-dark-grey text-white text-2xl cursor-pointer mt-5 p-2 rounded hover:bg-custom-grey"
+        >
+          MENU
+        </div>
       )}
     </div>
   );

@@ -2,82 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-.hangman {
+/* Ensure TailwindCSS is configured correctly in your project. */
+.menu-container {
+  padding-top: 10px;
+  text-align: center;
+  color: white;
+}
+.menu-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  display: block;
+}
+.lock {
+  pointer-events: none;
+  color: gray;
+}
+.game-container {
+  padding-top: 10px;
+  text-align: center;
+}
+.alphabet-container span {
+  background-color: #fcd34d;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.alphabet-container span.red {
+  background-color: red;
+}
+.alphabet-container span.green {
+  background-color: green;
+}
+#stickman {
+  cursor: pointer;
+}
+#stickman:hover {
+  animation: jmp 4s ease-out infinite;
+}
+#svg {
   position: relative;
-  width: 150px;
-  height: 200px;
-  border-left: 10px solid black;
-  border-top: 10px solid black;
-  margin-bottom: 20px;
+  width: 256px;
+  height: 224px;
+  background-color: #fcd34d;
+  margin: 0 auto;
 }
-
-.stand {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 20px;
-  width: 10px;
-  background: black;
+svg line{
+  stroke:#000;
+  stroke-width:5;
 }
-
-.hangman-part {
-  position: absolute;
-  background: black;
+svg .tb1{
+  stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    stroke-linecap:round;
 }
-
-.head {
-  top: 20px;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-left: -20px;
+.hidden {
+  display: none;
 }
-
-.body {
-  top: 60px;
-  left: 50%;
-  width: 10px;
-  height: 60px;
-  margin-left: -5px;
+.hint {
+  margin-left: 0.5rem;
 }
-
-.left-arm {
-  top: 60px;
-  left: 50%;
-  width: 10px;
-  height: 40px;
-  margin-left: -5px;
-  transform: rotate(-45deg);
-  transform-origin: top right;
+.passhint-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
-
-.right-arm {
-  top: 60px;
-  left: 50%;
-  width: 10px;
-  height: 40px;
-  margin-left: -5px;
-  transform: rotate(45deg);
-  transform-origin: top left;
-}
-
-.left-leg {
-  top: 120px;
-  left: 50%;
-  width: 10px;
-  height: 40px;
-  margin-left: -5px;
-  transform: rotate(-45deg);
-  transform-origin: top right;
-}
-
-.right-leg {
-  top: 120px;
-  left: 50%;
-  width: 10px;
-  height: 40px;
-  margin-left: -5px;
-  transform: rotate(45deg);
-  transform-origin: top left;
+.passhint-container .hint {
+  font-size: 2rem;
+  cursor: pointer;
 }

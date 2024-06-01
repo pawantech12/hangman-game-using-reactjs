@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 /* Ensure TailwindCSS is configured correctly in your project. */
+body{
+  font-family: "Boogaloo", sans-serif;
+}
 .menu-container {
   padding-top: 10px;
   text-align: center;
@@ -23,19 +26,7 @@
   padding-top: 10px;
   text-align: center;
 }
-.alphabet-container span {
-  background-color: #fcd34d;
-  margin: 0.25rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-.alphabet-container span.red {
-  background-color: red;
-}
-.alphabet-container span.green {
-  background-color: green;
-}
+
 #stickman {
   cursor: pointer;
 }
@@ -44,9 +35,9 @@
 }
 #svg {
   position: relative;
-  width: 256px;
+  width: 280px;
   height: 224px;
-  background-color: #fcd34d;
+
   margin: 0 auto;
 }
 svg line{

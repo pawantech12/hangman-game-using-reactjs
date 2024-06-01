@@ -4,7 +4,7 @@ function Stickman() {
   return (
     <svg
       id="stickman"
-      className="absolute bottom-0 left-48 animate-jump"
+      className="absolute bottom-[-31%] right-0"
       width="80px"
       height="100px"
     >

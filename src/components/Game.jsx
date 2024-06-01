@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modal";
 
-function Game({ hiddenWord, errors, checkLetter }) {
+function Game({
+  hiddenWord,
+  errors,
+  checkLetter,
+  correctLetters,
+  incorrectLetters,
+}) {
+  const handleCheckLetter = (letter) => {
+    checkLetter(letter);
+  };
   return (
-    <div id="game" className="pt-2 text-5xl w-full">
-      <div id="svg" className="mx-auto bg-custom-cream w-72 h-56 relative">
+    <div id="game" className="pt-2 text-5xl w-full relative">
+      <div id="svg" className="mx-auto bg-custom-cream w-full h-56 relative">
         {errors > 0 && (
           <svg id="t1" width="200px" height="230px" className="absolute">
             <line
@@ -143,7 +153,7 @@ function Game({ hiddenWord, errors, checkLetter }) {
         >
           {hiddenWord}
         </div>
-        <div className="hint w-12 text-3xl my-1 text-custom-grey bg-custom-black flex justify-center items-center ml-2 rounded-lg opacity-30 cursor-pointer">
+        <div className="hint w-12 text-3xl my-1 text-custom-cream bg-custom-black flex justify-center items-center ml-2 rounded-lg opacity-30 cursor-pointer">
           ?
         </div>
       </div>
@@ -154,8 +164,14 @@ function Game({ hiddenWord, errors, checkLetter }) {
         {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
           <span
             key={letter}
-            className="bg-custom-orange m-1 p-1 w-6 h-6 flex items-center justify-center rounded-full cursor-pointer"
-            onClick={() => checkLetter(letter)}
+            className={`bg-custom-orange m-1 p-3 w-8 h-8 text-xl flex items-center justify-center rounded-md cursor-pointer ${
+              correctLetters.includes(letter)
+                ? "bg-green-500"
+                : incorrectLetters.includes(letter)
+                ? "bg-red-500"
+                : "bg-custom-orange"
+            }`}
+            onClick={() => handleCheckLetter(letter)}
           >
             {letter}
           </span>

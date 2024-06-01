@@ -15,7 +15,7 @@ export default {
         "custom-red": "#ff0000",
         "custom-lime": "#00ff00",
         "custom-orange": "#e69100",
-        "custom-cream": "#EFDCB6",
+        "custom-cream": "#E6CB91",
       },
       animation: {
         dash: "dash 5s linear forwards",

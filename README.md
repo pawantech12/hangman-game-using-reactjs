@@ -3,6 +3,8 @@
 
 Welcome to the **Hangman Game**, a modern twist on the classic word-guessing game! Built with **ReactJS**, **Vite**, and **TailwindCSS**, this game features smooth transitions and an interactive interface where each wrong guess slowly reveals the hangman. The game is designed for a fun and challenging experience that tests your vocabulary skills.
 
+## Demo
+https://github.com/user-attachments/assets/fab43646-a2f7-4c0c-91fa-8f8107bc640f
 
 ## Features
 
